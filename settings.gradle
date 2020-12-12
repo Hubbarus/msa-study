@@ -1,4 +1,5 @@
 rootProject.name = 'msa-study'
+
 include 'customer'
 include 'supplier'
 
