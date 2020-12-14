@@ -1,11 +1,15 @@
 package customer.producer;
 
-import customer.CustomerApplication;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import customer.config.RabbitMQConfig;
+import customer.entity.Product;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.List;
 
 @Component
 public class CustomerMQProducer {
@@ -13,12 +17,17 @@ public class CustomerMQProducer {
     @Autowired
     private RabbitTemplate template;
 
-    @PostConstruct
-    public void init() {
-        
-    }
+    public void sendMessage(List<Product> productsToOrder) {
+        ObjectMapper mapper = new ObjectMapper();
+        StringWriter writer = new StringWriter();
 
-    public void sendMessage() {
-        template.convertAndSend(CustomerApplication.TOPIC_EXCHANGE_NAME, "app.api.rmg", "order pls!");
+        try {
+            mapper.writeValue(writer, productsToOrder);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        template.convertAndSend(RabbitMQConfig.ORDER_EXCHANGE, "customer.key.baz", writer.toString());
+        System.err.println("in SendMessage");
     }
 }

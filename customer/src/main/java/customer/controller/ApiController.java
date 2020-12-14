@@ -1,12 +1,13 @@
 package customer.controller;
 
-import customer.consumer.CustomerMQConsumer;
+import customer.consumer.ResponseReceiver;
+import customer.entity.Product;
 import customer.producer.CustomerMQProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
 
 @RestController
 public class ApiController {
@@ -14,12 +15,14 @@ public class ApiController {
     @Autowired
     private CustomerMQProducer producer;
     @Autowired
-    private CustomerMQConsumer consumer;
+    private ResponseReceiver reciever;
 
-    @GetMapping("/api/sendOrder")
-    public ResponseEntity<?> sendOrder() {
-        System.err.println("in endpoint");
-        producer.sendMessage();
-        return consumer.getResponse();
+    @PostMapping("/api/sendOrder")
+    public ResponseEntity<?> sendOrder(@RequestBody Product[] productsToOrder) {
+        System.out.println(Arrays.asList(productsToOrder));
+
+        producer.sendMessage(Arrays.asList(productsToOrder));
+
+        return reciever.getResponse();
     }
 }
