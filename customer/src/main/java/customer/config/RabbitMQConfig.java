@@ -34,13 +34,13 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public TopicExchange orderExchange() {
-        return new TopicExchange(ORDER_EXCHANGE);
+    public DirectExchange orderExchange() {
+        return new DirectExchange(ORDER_EXCHANGE);
     }
 
     @Bean
-    public TopicExchange responseExchange() {
-        return new TopicExchange(RESPONSE_EXCHANGE);
+    public DirectExchange responseExchange() {
+        return new DirectExchange(RESPONSE_EXCHANGE);
     }
 
     @Bean
@@ -64,7 +64,7 @@ public class RabbitMQConfig {
         return BindingBuilder
                 .bind(orderQueue())
                 .to(orderExchange())
-                .with("customer.key.#");
+                .with("customer.key.baz");
     }
 
     @Bean
@@ -72,7 +72,7 @@ public class RabbitMQConfig {
         return BindingBuilder
                 .bind(responseQueue())
                 .to(responseExchange())
-                .with("supplier.key.#");
+                .with("supplier.key.baz");
     }
 
     @Bean
