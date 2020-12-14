@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  customer:
+    build: ./customer
+    container_name: customer
+    ports:
+      - 8080:8080
+    depends_on:
+      - rabbitmq
+
+  supplier:
+    build: ./supplier
+    container_name: supplier
+    ports:
+      - 8880:8080
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbitmq
+    ports:
+      - 15691:15691
+      - 15692:15692
+      - 25672:25672
+      - 4369:4369
+      - 5671:5671
+      - 5672:5672
