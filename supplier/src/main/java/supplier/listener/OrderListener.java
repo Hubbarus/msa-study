@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class OrderListener {
 
     @RabbitListener(queues = "${rabbitmq.customerQueue}")
-    public void listen(byte[] msg) {
+    public void listen(String msg) {
         System.out.println("____________HEREEEE!!!_____________ " + new String(msg));
     }
 

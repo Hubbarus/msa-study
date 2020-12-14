@@ -26,9 +26,6 @@ public class ResponseReceiver {
     }
 
     public ResponseEntity<?> getResponse() {
-        while (!wasReceived) {
-            System.out.println("Waiting for message!");
-        }
         return response;
     }
 }
