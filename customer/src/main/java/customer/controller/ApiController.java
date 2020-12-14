@@ -1,7 +1,7 @@
 package customer.controller;
 
 import customer.consumer.ResponseReceiver;
-import customer.entity.Product;
+import customer.model.Product;
 import customer.producer.CustomerMQProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

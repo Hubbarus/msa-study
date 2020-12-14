@@ -7,10 +7,7 @@ services:
       - 15672:15672
       - 5672:5672
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:15672" ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      test: "exit 0"
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
@@ -21,7 +18,8 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
 
   supplier:
     build: ./supplier
@@ -29,4 +27,5 @@ services:
     ports:
       - 8880:8080
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy

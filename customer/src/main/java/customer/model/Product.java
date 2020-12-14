@@ -1,4 +1,4 @@
-package customer.entity;
+package customer.model;
 
 import java.io.Serializable;
 import java.util.Objects;

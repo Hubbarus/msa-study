@@ -2,7 +2,7 @@ package customer.producer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import customer.config.RabbitMQConfig;
-import customer.entity.Product;
+import customer.model.Product;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
