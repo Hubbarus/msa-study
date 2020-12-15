@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResponseManager {
 
-    public ResponseEntity<?> createResponse(byte[] msg) {
+    public ResponseEntity<?> createResponse(String msg) {
         Receipt receipt;
         ObjectMapper mapper = new ObjectMapper();
         try {

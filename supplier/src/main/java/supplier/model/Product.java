@@ -1,9 +1,10 @@
-package customer.model;
+package supplier.model;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 public class Product implements Serializable {
+
     private String name;
     private int quantity;
     private int price;
@@ -53,4 +54,5 @@ public class Product implements Serializable {
                 ", price=" + price +
                 '}';
     }
+
 }

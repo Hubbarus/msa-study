@@ -19,7 +19,7 @@ public class ResponseReceiver {
     private boolean wasReceived;
 
     @RabbitListener(queues = RabbitMQConfig.QUEUE_RESPONSE_NAME)
-    public void receive(byte[] msg) {
+    public void receive(String msg) {
         System.out.println("in Receive");
         wasReceived = true;
         response = manager.createResponse(msg);

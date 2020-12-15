@@ -58,4 +58,13 @@ public class Receipt implements Serializable {
         result = 31 * result + totalPrice;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Receipt{" +
+                "receiptId=" + receiptId +
+                ", receiptBody='" + receiptBody + '\'' +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }
