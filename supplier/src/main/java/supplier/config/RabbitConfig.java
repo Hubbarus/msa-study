@@ -6,6 +6,7 @@ import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,15 @@ public class RabbitConfig {
         messageListenerContainer.setConnectionFactory(connectionFactory());
         messageListenerContainer.setMessageListener(messageListenerAdapter);
         return messageListenerContainer;
+    }
+
+    @Bean
+    public RabbitTemplate rabbitTemplate() {
+        RabbitTemplate rabbitTemplate = new RabbitTemplate();
+        rabbitTemplate.setConnectionFactory(connectionFactory());
+        rabbitTemplate.setExchange(rabbitProperties.getSupplierExchange());
+        rabbitTemplate.setRoutingKey(rabbitProperties.getSupplierRoutingKey());
+        return rabbitTemplate;
     }
 
 }
