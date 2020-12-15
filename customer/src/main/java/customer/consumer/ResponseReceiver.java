@@ -19,13 +19,22 @@ public class ResponseReceiver {
     private boolean wasReceived;
 
     @RabbitListener(queues = RabbitMQConfig.QUEUE_RESPONSE_NAME)
-    public void receive(byte[] msg) {
+    public void receive(String msg) {
         System.out.println("in Receive");
         wasReceived = true;
         response = manager.createResponse(msg);
     }
 
     public ResponseEntity<?> getResponse() {
+        while (!wasReceived) {
+            System.out.println("Waiting for msg..................");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        wasReceived = false;
         return response;
     }
 }

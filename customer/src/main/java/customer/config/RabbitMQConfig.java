@@ -77,7 +77,7 @@ public class RabbitMQConfig {
 
     @Bean
     MessageListenerAdapter listenerAdapter(ResponseReceiver receiver) {
-        return new MessageListenerAdapter(receiver, "receiveMessage");
+        return new MessageListenerAdapter(receiver, "receive");
     }
 
 
