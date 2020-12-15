@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Product implements Serializable {
     private String name;
     private int quantity;
+    private int price;
 
     public int getQuantity() {
         return quantity;
@@ -23,17 +24,25 @@ public class Product implements Serializable {
         this.name = name;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return quantity == product.quantity && Objects.equals(name, product.name);
+        return quantity == product.quantity && price == product.price && Objects.equals(name, product.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, quantity);
+        return Objects.hash(name, quantity, price);
     }
 
     @Override
@@ -41,6 +50,7 @@ public class Product implements Serializable {
         return "Product{" +
                 "name='" + name + '\'' +
                 ", quantity=" + quantity +
+                ", price=" + price +
                 '}';
     }
 }
