@@ -12,14 +12,19 @@ import org.springframework.stereotype.Component;
 public class ResponseManager {
 
     public ResponseEntity<?> createResponse(String msg) {
-        Receipt receipt;
+        System.out.println("Creating response.......");
+        Receipt receipt = new Receipt();
         ObjectMapper mapper = new ObjectMapper();
         try {
-             receipt = (Receipt) mapper.readValue(new String(msg), new TypeReference<Object>() {
+             receipt = mapper.readValue(msg, new TypeReference<Receipt>() {
             });
+            System.out.println(receipt);
         } catch (JsonProcessingException e) {
-            return new ResponseEntity<>("Out of stock",HttpStatus.NOT_IMPLEMENTED);
+            e.printStackTrace();
         }
-        return new ResponseEntity<>(receipt, HttpStatus.OK);
+        String receiptBody = receipt.getReceiptBody();
+        return receiptBody.equals("Ok") ?
+                new ResponseEntity<>(receiptBody, HttpStatus.OK)
+                : new ResponseEntity<>(receiptBody, HttpStatus.NOT_IMPLEMENTED);
     }
 }

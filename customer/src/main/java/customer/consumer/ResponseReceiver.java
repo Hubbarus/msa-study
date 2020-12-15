@@ -26,6 +26,15 @@ public class ResponseReceiver {
     }
 
     public ResponseEntity<?> getResponse() {
+        while (!wasReceived) {
+            System.out.println("Waiting for msg..................");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        wasReceived = false;
         return response;
     }
 }
