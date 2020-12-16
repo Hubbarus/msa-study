@@ -22,9 +22,9 @@ public class RabbitMQConfig {
     @Bean
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory =
-                new CachingConnectionFactory("localhost");
-        connectionFactory.setUsername("guest");
-        connectionFactory.setPassword("guest");
+                new CachingConnectionFactory("host.docker.internal");
+        connectionFactory.setUsername("admin");
+        connectionFactory.setPassword("admin");
         return connectionFactory;
     }
 
