@@ -46,9 +46,9 @@ public class OrderAdapter {
         String orderId = String.valueOf(atomicInteger.getAndIncrement());
         orderRepository.add(orderId, order);
         runtimeService.createProcessInstanceByKey(ORDER_PROCESS_KEY)
-                .businessKey(order.getActivityId())
-                .setVariable("orderId", orderId)
-                .executeWithVariablesInReturn();
+                    .setVariable("orderId", orderId)
+                    .executeWithVariablesInReturn();
+
     }
 
     public void send(String activityId, Receipt receipt) {

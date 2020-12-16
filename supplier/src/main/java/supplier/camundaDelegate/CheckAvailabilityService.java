@@ -20,6 +20,7 @@ public class CheckAvailabilityService implements JavaDelegate {
             execution.setVariable("body", "Out of stock");
         } else {
             execution.setVariable("body", "Ok");
+            execution.setVariable("isAvailable", 1);
         }
         execution.setVariable("order", orderService.getOrderById(orderId));
     }

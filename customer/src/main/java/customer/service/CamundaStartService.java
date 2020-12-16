@@ -21,8 +21,6 @@ public class CamundaStartService {
     public void startCamundaProcess(Order order) {
         System.out.println("-------------------------------MSG from StartService-------------------------------");
 
-        ProcessInstance processInstance = service.startProcessInstanceByKey(PROCESS_KEY, order.getActivityId());
-
         ProcessInstanceWithVariables orderList = service
                 .createProcessInstanceByKey(PROCESS_KEY)
                 .setVariable("order", order)
