@@ -12,7 +12,7 @@ import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import supplier.listener.OrderListener;
+import supplier.processapi.OrderAdapter;
 
 @Configuration
 public class RabbitConfig {
@@ -67,8 +67,8 @@ public class RabbitConfig {
     }
 
     @Bean
-    public MessageListenerAdapter messageListenerAdapter(OrderListener listener) {
-        return new MessageListenerAdapter(listener, "listen");
+    public MessageListenerAdapter messageListenerAdapter(OrderAdapter listener) {
+        return new MessageListenerAdapter(listener, "start");
     }
 
     @Bean
