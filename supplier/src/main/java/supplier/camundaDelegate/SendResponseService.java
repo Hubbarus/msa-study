@@ -15,7 +15,7 @@ public class SendResponseService implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        String activityId = execution.getProcessBusinessKey();
+        String activityId = execution.getCurrentActivityId();
         Receipt receipt = (Receipt) execution.getVariable("receipt");
 
         orderAdapter.send(activityId, receipt);

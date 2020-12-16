@@ -17,7 +17,10 @@ public class SendMessageService implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         System.out.println("-----------------------MSG from execute SendMessageService------------------------");
 
-        producer.sendMessage((Order) execution.getVariable("order"));
+        Order order = (Order) execution.getVariable("order");
+        String currentActivityId = execution.getCurrentActivityId();
+
+        producer.sendMessage(order);
 
         execution.setVariable("wasSent", 1);
     }
