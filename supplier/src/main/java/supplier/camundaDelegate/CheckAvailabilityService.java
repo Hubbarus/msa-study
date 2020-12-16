@@ -16,8 +16,8 @@ public class CheckAvailabilityService implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         String orderId = (String) execution.getVariable("orderId");
         if (!orderService.areProductsAvailable(orderService.getOrderById(orderId))) {
+            execution.setVariable("body", "Out of stock, need to order some shit");
             execution.setVariable("isAvailable", 0);
-            execution.setVariable("body", "Out of stock");
         } else {
             execution.setVariable("body", "Ok");
             execution.setVariable("isAvailable", 1);
