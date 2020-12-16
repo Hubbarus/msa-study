@@ -31,7 +31,7 @@
     </bpmn:endEvent>
     <bpmn:serviceTask id="Activity_0f3owsa" name="Order from suplier" camunda:delegateExpression="${orderFromSupplierService}">
       <bpmn:incoming>Flow_0t0ygkj</bpmn:incoming>
-      <bpmn:outgoing>Flow_18xuoaw</bpmn:outgoing>
+      <bpmn:outgoing>Flow_18xuoaw</bpmn:outgoing>git
     </bpmn:serviceTask>
     <bpmn:serviceTask id="Activity_0mcwjuv" name="Create Response" camunda:delegateExpression="${createResponseService}">
       <bpmn:incoming>Flow_05sq8c1</bpmn:incoming>
