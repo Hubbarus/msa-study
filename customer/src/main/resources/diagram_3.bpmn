@@ -14,7 +14,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_14oejz6" name="entry" sourceRef="StartEvent_1" targetRef="Activity_1r99qbx" />
     <bpmn:sequenceFlow id="Flow_1m3ozm2" sourceRef="Activity_1r99qbx" targetRef="Event_1qpbaaw">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${var == 1}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${wasSent== 1}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1126qbz" sourceRef="Event_1qpbaaw" targetRef="Gateway_17c9dex" />
     <bpmn:sequenceFlow id="Flow_0muhi7v" name="ok" sourceRef="Gateway_17c9dex" targetRef="Activity_0fug656">
