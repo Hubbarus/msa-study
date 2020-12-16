@@ -29,7 +29,7 @@
       <bpmn:incoming>Flow_1wbbqy4</bpmn:incoming>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0nij0x8" camunda:delegateExpression="${sendResponseService}" />
     </bpmn:endEvent>
-    <bpmn:serviceTask id="Activity_0f3owsa" name="Order from suplier" camunda:delegateExpression="${orderFromSupplierServcie}">
+    <bpmn:serviceTask id="Activity_0f3owsa" name="Order from suplier" camunda:delegateExpression="${orderFromSupplierService}">
       <bpmn:incoming>Flow_0t0ygkj</bpmn:incoming>
       <bpmn:outgoing>Flow_18xuoaw</bpmn:outgoing>
     </bpmn:serviceTask>
