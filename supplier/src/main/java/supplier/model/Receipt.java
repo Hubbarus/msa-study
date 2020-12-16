@@ -11,6 +11,7 @@ public class Receipt implements Serializable {
     private UUID receiptId;
     private String receiptBody;
     private int totalPrice;
+    private int availability;
 
     public Receipt() {
     }
@@ -47,6 +48,14 @@ public class Receipt implements Serializable {
         this.totalPrice = totalPrice;
     }
 
+    public int getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(int availability) {
+        this.availability = availability;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,6 +64,7 @@ public class Receipt implements Serializable {
         Receipt receipt = (Receipt) o;
 
         if (totalPrice != receipt.totalPrice) return false;
+        if (availability != receipt.availability) return false;
         if (!Objects.equals(activityId, receipt.activityId)) return false;
         if (!Objects.equals(receiptId, receipt.receiptId)) return false;
         return Objects.equals(receiptBody, receipt.receiptBody);
@@ -66,6 +76,7 @@ public class Receipt implements Serializable {
         result = 31 * result + (receiptId != null ? receiptId.hashCode() : 0);
         result = 31 * result + (receiptBody != null ? receiptBody.hashCode() : 0);
         result = 31 * result + totalPrice;
+        result = 31 * result + availability;
         return result;
     }
 
@@ -76,6 +87,7 @@ public class Receipt implements Serializable {
                 ", receiptId=" + receiptId +
                 ", receiptBody='" + receiptBody + '\'' +
                 ", totalPrice=" + totalPrice +
+                ", areProductsAvailable=" + availability +
                 '}';
     }
 
