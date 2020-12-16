@@ -3,7 +3,10 @@ package supplier.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import supplier.model.Order;
+import supplier.model.Product;
 import supplier.repository.InMemoryOrderRepository;
+
+import java.util.List;
 
 @Service
 public class OrderService {

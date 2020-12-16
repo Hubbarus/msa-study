@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 @RestController
@@ -29,7 +28,7 @@ public class ApiController {
         order.setProductList(Arrays.asList(productsToOrder));
         order.setActivityId("activity_ID");
 
-        camundaStartService.startCamundaProcess(order);
+        camundaStartService.startCamundaRestProcess(order);
 
         return receiver.getResponse();
     }

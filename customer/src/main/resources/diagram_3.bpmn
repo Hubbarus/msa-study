@@ -14,7 +14,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_14oejz6" name="entry" sourceRef="StartEvent_1" targetRef="Activity_1r99qbx" />
     <bpmn:sequenceFlow id="Flow_1m3ozm2" sourceRef="Activity_1r99qbx" targetRef="Event_1qpbaaw">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${var == 1}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${wasSent== 1}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1126qbz" sourceRef="Event_1qpbaaw" targetRef="Activity_1c0smlr" />
     <bpmn:sequenceFlow id="Flow_0muhi7v" name="ok" sourceRef="Gateway_17c9dex" targetRef="Activity_0fug656">
@@ -46,16 +46,17 @@
     <bpmn:intermediateCatchEvent id="Event_1qpbaaw">
       <bpmn:incoming>Flow_1m3ozm2</bpmn:incoming>
       <bpmn:outgoing>Flow_1126qbz</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_1nimgb3" messageRef="Message_0c5by40" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1nimgb3" messageRef="Message_10w0vzb" />
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="Flow_0kd505a" sourceRef="Activity_1c0smlr" targetRef="Gateway_17c9dex" />
-    <bpmn:serviceTask id="Activity_1c0smlr" name="GenerateResponse" camunda:delegateExpression="${generateResponseService}">
+    <bpmn:serviceTask id="Activity_1c0smlr" name="GenerateResponse" camunda:delegateExpression="${generateResponse}">
       <bpmn:incoming>Flow_1126qbz</bpmn:incoming>
       <bpmn:outgoing>Flow_0kd505a</bpmn:outgoing>
     </bpmn:serviceTask>
   </bpmn:process>
   <bpmn:process id="Process_supplier" isExecutable="false" />
-  <bpmn:message id="Message_0c5by40" name="Message_0vhs9m7" />
+  <bpmn:message id="Message_0c5by40" />
+  <bpmn:message id="Message_10w0vzb" name="message" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0qc437i">
       <bpmndi:BPMNShape id="Participant_19akpl0_di" bpmnElement="Participant_19akpl0" isHorizontal="true">

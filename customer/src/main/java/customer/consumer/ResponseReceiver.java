@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import customer.config.RabbitMQConfig;
 import customer.model.Receipt;
+import customer.service.CamundaStartService;
 import customer.service.ResponseManager;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.MessageCorrelationBuilder;
@@ -25,7 +26,7 @@ public class ResponseReceiver {
     private ResponseManager manager;
 
     @Autowired
-    private RuntimeService runtimeService;
+    private CamundaStartService startService;
 
     private ResponseEntity response;
 
@@ -34,37 +35,7 @@ public class ResponseReceiver {
     @RabbitListener(queues = RabbitMQConfig.QUEUE_RESPONSE_NAME)
     public void receive(String msg) {
         System.out.println("in Receive");
-
-        correlateAndForwardResponseToBPMNService(msg);
-    }
-
-    private void correlateAndForwardResponseToBPMNService(String message) {
-        System.out.println("----------------------------Correlating message------------------------");
-
-        Receipt receipt = getReceiptObject(message);
-
-        int areProductsAvailable = receipt.getAvailability();
-
-        HashMap<String, Object> processKeys = new HashMap<>();
-        processKeys.put("isOk", areProductsAvailable);
-        processKeys.put("receipt", receipt);
-
-        String activityId = receipt.getActivityId();
-
-        runtimeService.correlateMessage("Message_0c5by40", activityId, processKeys);
-    }
-
-    private Receipt getReceiptObject(String message) {
-        Receipt receipt = new Receipt();
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            receipt = mapper.readValue(message, new TypeReference<Receipt>() {
-            });
-            System.out.println(receipt);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return receipt;
+        startService.correlateAndForward(msg);
     }
 
     public ResponseEntity<?> getResponse() {

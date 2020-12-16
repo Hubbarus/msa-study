@@ -9,19 +9,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-@Service("generateResponse")
-public class GenerateResponseService implements JavaDelegate {
+@Service("doPayment")
+public class DoPaymentService implements JavaDelegate {
 
     @Autowired
     private ResponseReceiver receiver;
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        int isOk = (int) execution.getVariable("isOk");
+        System.out.println("----------------------In do Payment---------------------");
 
-        if (isOk == 0) {
-            Receipt receipt = (Receipt) execution.getVariable("receipt");
-            receiver.setResponse(new ResponseEntity<>(receipt.getReceiptBody(), HttpStatus.NOT_ACCEPTABLE));
-        }
+        Receipt receipt = (Receipt) execution.getVariable("receipt");
+        receiver.setResponse(new ResponseEntity<>(receipt.getReceiptBody(), HttpStatus.OK));
     }
 }
