@@ -6,13 +6,21 @@ import java.util.UUID;
 
 public class Receipt implements Serializable {
 
+    private String activityId;
+
     private UUID receiptId;
-
     private String receiptBody;
-
     private int totalPrice;
 
     public Receipt() {
+    }
+
+    public String getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(String activityId) {
+        this.activityId = activityId;
     }
 
     public UUID getReceiptId() {
@@ -47,13 +55,15 @@ public class Receipt implements Serializable {
         Receipt receipt = (Receipt) o;
 
         if (totalPrice != receipt.totalPrice) return false;
+        if (!Objects.equals(activityId, receipt.activityId)) return false;
         if (!Objects.equals(receiptId, receipt.receiptId)) return false;
         return Objects.equals(receiptBody, receipt.receiptBody);
     }
 
     @Override
     public int hashCode() {
-        int result = receiptId != null ? receiptId.hashCode() : 0;
+        int result = activityId != null ? activityId.hashCode() : 0;
+        result = 31 * result + (receiptId != null ? receiptId.hashCode() : 0);
         result = 31 * result + (receiptBody != null ? receiptBody.hashCode() : 0);
         result = 31 * result + totalPrice;
         return result;
@@ -62,9 +72,11 @@ public class Receipt implements Serializable {
     @Override
     public String toString() {
         return "Receipt{" +
-                "receiptId=" + receiptId +
+                "activityId='" + activityId + '\'' +
+                ", receiptId=" + receiptId +
                 ", receiptBody='" + receiptBody + '\'' +
                 ", totalPrice=" + totalPrice +
                 '}';
     }
+
 }

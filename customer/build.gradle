@@ -22,13 +22,32 @@ jar {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	compile 'org.springframework.boot:spring-boot-starter-actuator'
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.springframework.boot:spring-boot-starter-amqp'
+	compile 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter:7.14.0'
+	compile 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest:7.14.0'
+	compile 'org.camunda.bpm:camunda-engine:7.14.0'
+	compile 'com.h2database:h2'
 
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testCompile('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
 }
+//dependencies {
+//	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+//
+//	implementation group: 'org.camunda.bpm', name: 'camunda-engine', version: '7.14.0'
+//	implementation group: 'org.camunda.connect', name: 'camunda-connect-core', version: '1.5.0'
+//	implementation group: 'org.camunda.connect', name: 'camunda-connect-connectors-all', version: '1.5.0'
+//
+//
+//
+//	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//}
 
 test {
 	useJUnitPlatform()
