@@ -1,24 +1,22 @@
 package customer.controller;
 
-import customer.consumer.ResponseReceiver;
+import customer.consumer.ResponseHolder;
 import customer.model.Order;
 import customer.model.Product;
-import customer.producer.CustomerMQProducer;
 import customer.service.CamundaStartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 @RestController
 public class ApiController {
 
     @Autowired
-    private CustomerMQProducer producer;
-    @Autowired
-    private ResponseReceiver receiver;
+    private ResponseHolder holder;
     @Autowired
     private CamundaStartService camundaStartService;
 
@@ -29,8 +27,8 @@ public class ApiController {
         order.setProductList(Arrays.asList(productsToOrder));
         order.setActivityId("activity_ID");
 
-        camundaStartService.startCamundaProcess(order);
+        camundaStartService.startCamundaRestProcess(order);
 
-        return receiver.getResponse();
+        return holder.getResponse();
     }
 }

@@ -12,7 +12,7 @@ public class OrderService {
     private InMemoryOrderRepository orderRepository;
 
     public boolean areProductsAvailable(Order order) {
-        return order.getProductList().stream().anyMatch(product -> product.getQuantity() <= 5);
+        return order.getProductList().stream().noneMatch(product -> product.getQuantity() > 5);
     }
 
     public Order getOrderById(String id) {

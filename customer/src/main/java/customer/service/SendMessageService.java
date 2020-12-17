@@ -15,9 +15,9 @@ public class SendMessageService implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        System.out.println("-----------------------MSG from execute SendMessageService------------------------");
+        Order order = (Order) execution.getVariable("order");
 
-        producer.sendMessage((Order) execution.getVariable("order"));
+        producer.sendMessage(order);
 
         execution.setVariable("wasSent", 1);
     }
