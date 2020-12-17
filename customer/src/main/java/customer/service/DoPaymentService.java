@@ -1,6 +1,6 @@
 package customer.service;
 
-import customer.consumer.ResponseReceiver;
+import customer.consumer.ResponseHolder;
 import customer.model.Receipt;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -13,13 +13,11 @@ import org.springframework.stereotype.Service;
 public class DoPaymentService implements JavaDelegate {
 
     @Autowired
-    private ResponseReceiver receiver;
+    private ResponseHolder holder;
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        System.out.println("----------------------In do Payment---------------------");
-
         Receipt receipt = (Receipt) execution.getVariable("receipt");
-        receiver.setResponse(new ResponseEntity<>(receipt.getReceiptBody(), HttpStatus.OK));
+        holder.setResponse(new ResponseEntity<>(receipt.getReceiptBody(), HttpStatus.OK));
     }
 }

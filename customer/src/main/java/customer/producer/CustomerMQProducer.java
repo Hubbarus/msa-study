@@ -27,6 +27,5 @@ public class CustomerMQProducer {
         }
 
         template.convertAndSend(RabbitMQConfig.ORDER_EXCHANGE, "customer.key.baz", writer.toString());
-        System.err.println("-------------------Msg to supplier was Sent---------------");
     }
 }

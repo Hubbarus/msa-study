@@ -1,7 +1,6 @@
 package customer.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import customer.model.Order;
 import customer.model.Receipt;
@@ -20,15 +19,10 @@ public class CamundaStartService {
     private RuntimeService service;
 
     public void startCamundaRestProcess(Order order) {
-        System.out.println("-------------------------------MSG from StartRestService-------------------------------");
-
         ProcessInstanceWithVariables orderList = service
                 .createProcessInstanceByKey(PROCESS_KEY)
                 .setVariable("order", order)
                 .executeWithVariablesInReturn();
-
-
-        System.out.println("---------------------------END of StartRestProcess--------------------------");
     }
 
     public void correlateAndForward(String msg) {
@@ -44,9 +38,7 @@ public class CamundaStartService {
         Receipt receipt = new Receipt();
         ObjectMapper mapper = new ObjectMapper();
         try {
-            receipt = mapper.readValue(message, new TypeReference<Receipt>() {
-            });
-            System.out.println(receipt);
+            receipt = mapper.readValue(message, Receipt.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
