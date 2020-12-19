@@ -24,6 +24,7 @@ public class RabbitMQConfig {
         CachingConnectionFactory connectionFactory =
                 new CachingConnectionFactory("host.docker.internal");
         connectionFactory.setUsername("admin");
+        connectionFactory.setConnectionTimeout(1000);
         connectionFactory.setPassword("admin");
         return connectionFactory;
     }
@@ -45,8 +46,7 @@ public class RabbitMQConfig {
 
     @Bean
     public RabbitTemplate rabbitTemplate() {
-        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
-        return rabbitTemplate;
+        return new RabbitTemplate(connectionFactory());
     }
 
     @Bean
