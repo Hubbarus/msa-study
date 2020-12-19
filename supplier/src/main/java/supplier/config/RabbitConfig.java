@@ -65,6 +65,7 @@ public class RabbitConfig {
         connectionFactory.setPort(rabbitProperties.getPort());
         connectionFactory.setUsername(rabbitProperties.getUser());
         connectionFactory.setPassword(rabbitProperties.getPassword());
+        connectionFactory.setConnectionTimeout(1000);
         return connectionFactory;
     }
 

@@ -9,7 +9,7 @@ import java.util.Map;
 @Repository
 public class InMemoryOrderRepository {
 
-    private Map<String, Order> orderMap = new HashMap<>();
+    private final Map<String, Order> orderMap = new HashMap<>();
 
     public void add(String orderId, Order order) {
         orderMap.put(orderId, order);

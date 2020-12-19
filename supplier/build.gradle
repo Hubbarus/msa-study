@@ -29,9 +29,10 @@ dependencies {
 	compile 'org.camunda.bpm:camunda-engine:7.14.0'
 	compile 'com.h2database:h2'
 
-	testCompile('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	testCompile 'org.springframework.boot:spring-boot-starter-test:2.4.1'
+	testCompile 'org.camunda.bpm.assert:camunda-bpm-assert:7.0.0'
+	testCompile 'org.camunda.bpm.extension.mockito:camunda-bpm-mockito:4.13.0'
+	testCompile 'junit:junit:4.13'
 }
 
 test {
