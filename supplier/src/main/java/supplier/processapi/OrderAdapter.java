@@ -9,11 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import supplier.model.Order;
 import supplier.model.Receipt;
-import supplier.repository.InMemoryOrderRepository;
+import supplier.service.OrderService;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 public class OrderAdapter {
@@ -30,9 +29,7 @@ public class OrderAdapter {
     private RabbitTemplate rabbitTemplate;
 
     @Autowired
-    private InMemoryOrderRepository orderRepository;
-
-    private final AtomicInteger atomicInteger = new AtomicInteger(0);
+    private OrderService orderService;
 
     @RabbitListener(queues = "${rabbitmq.customerQueue}")
     public void start(String msg) throws JsonProcessingException {
@@ -41,10 +38,8 @@ public class OrderAdapter {
 
     private void startCamundaProcess(String message) throws JsonProcessingException {
         Order order = objectMapper.readValue(message, Order.class);
-        String orderId = String.valueOf(atomicInteger.getAndIncrement());
-        orderRepository.add(orderId, order);
         runtimeService.createProcessInstanceByKey(ORDER_PROCESS_KEY)
-                    .setVariable("orderId", orderId)
+                    .setVariable("orderId", orderService.addOrder(order))
                     .executeWithVariablesInReturn();
 
     }
